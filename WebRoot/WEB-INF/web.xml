@@ -27,14 +27,5 @@
     <servlet-name>SampleSpring</servlet-name>
     <url-pattern>/app/*</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description>Download files</description>
-    <display-name>DownloadServlet</display-name>
-    <servlet-name>DownloadServlet</servlet-name>
-    <servlet-class>net.esc20.txeis.sample.servlets.DownloadServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DownloadServlet</servlet-name>
-    <url-pattern>/DownloadServlet</url-pattern>
-  </servlet-mapping>
+
 </web-app>
