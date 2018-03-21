@@ -1,5 +1,6 @@
 package com.heb.dao;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,10 +38,80 @@ public class ProductDao extends NamedParameterJdbcDaoSupport {
 			where.append("%' ");
 		}
 		
+		if (prodFilter.getDescription().length() > 0) {
+			if (where.length() > 0) {
+				where.append(" and ");
+			}
+			where.append("description like '%");
+			where.append(prodFilter.getDescription());
+			where.append("%' ");
+		}
+		
+//		if (prodFilter.getLastsold().toString().length() > 0) {
+//			if (where.length() > 0) {
+//				where.append(" and ");
+//			}
+//			where.append("lastsold like '%");
+//			where.append(prodFilter.getLastsold().toString());
+//			where.append("%' ");
+//		}
+		
+		if (prodFilter.getShelflife().length() > 0) {
+			if (where.length() > 0) {
+				where.append(" and ");
+			}
+			where.append("shelflife like '%");
+			where.append(prodFilter.getShelflife());
+			where.append("%' ");
+		}
+		
+		if (prodFilter.getDepartment().length() > 0) {
+			if (where.length() > 0) {
+				where.append(" and ");
+			}
+			where.append("department like '%");
+			where.append(prodFilter.getDepartment());
+			where.append("%' ");
+		}
+		
+		if (prodFilter.getPrice().compareTo(new BigDecimal(0)) > 0) {
+			if (where.length() > 0) {
+				where.append(" and ");
+			}
+			where.append("price >= ");
+			where.append(prodFilter.getPrice());
+		}
+		
+		if (prodFilter.getUnit().length() > 0) {
+			if (where.length() > 0) {
+				where.append(" and ");
+			}
+			where.append("unit like '%");
+			where.append(prodFilter.getUnit());
+			where.append("%' ");
+		}
+		
+		if (prodFilter.getXfor() > 0) {
+			if (where.length() > 0) {
+				where.append(" and ");
+			}
+			where.append("xfor = ");
+			where.append(prodFilter.getXfor());
+		}
+		
+		if (prodFilter.getCost().compareTo(new BigDecimal(0)) > 0) {
+			if (where.length() > 0) {
+				where.append(" and ");
+			}
+			where.append("cost >= ");
+			where.append(prodFilter.getCost());
+		}
+				
 		if (where.length() > 0) {
-			sql.append("where ");
+			sql.append(" where ");
 			sql.append(where);
 		}
+		
 		
 		//Map<String, Object> paramMap = new HashMap<String, Object>();
 		List<Products> prods = new ArrayList<Products>();

@@ -14,6 +14,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<title>Products Page Demo</title>
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
 	<style type="text/css">
 	.column {
 		display: table;
@@ -21,6 +25,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		padding-top: 5px;
 	}
 	
+	tr:nth-child(even) {
+		background: #CCC;
+	}
+	
+	input {
+		margin-right: 5px;
+	}
 	</style>
 
 </head>
@@ -38,19 +49,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		Please enter your search criteria for the product list
 	</div>
 	
-	<div class="column">ID: <form:input path="prodFilter.id" size="3" /></div>
-	<div class="column">Description: <form:input path="prodFilter.description" size="10" /></div>
-	<div class="column">Date Last Sold: <form:input path="prodFilter.lastsold" size="5" /></div>
-	<div class="column">Shelf Life: <form:input path="prodFilter.shelflife" size="5" /></div>
-	<div class="column">Department: <form:input path="prodFilter.department" size="5" /></div>
-	<div class="column">Price: <form:input path="prodFilter.price" size="5" /></div>
-	<div class="column">Unit: <form:input path="prodFilter.unit" size="5" /></div>
-	<div class="column">For Each: <form:input path="prodFilter.xfor" size="5" /></div>
-	<div class="column">Cost: <form:input path="prodFilter.cost" size="5" /></div>
+	<div style="display: inline-block; border-style:solid; border-width: 2px; margin: 5px 5px 5px 5px; padding: 5px 5px 5px 5px;">
+		<div class="column">
+			ID: <form:input path="prodFilter.id" size="5" maxlength="7"/>
+			Description: <form:input path="prodFilter.description" size="15" maxlength="20"/>
+			Date Last Sold: <form:input path="prodFilter.lastsold" size="10" id="datepicker"/>
+		</div>
+		<div class="column">
+			Shelf Life: <form:input path="prodFilter.shelflife" size="5" maxlength="4"/>
+			Department: <form:input path="prodFilter.department" size="5" maxlength="8"/>
+			Price(Greater than): <form:input path="prodFilter.price" size="5" maxlength="4"/>
+		</div>
+		<div class="column">
+			Unit: <form:input path="prodFilter.unit" size="5" maxlength="4"/>
+			For Each(Equals): <form:input path="prodFilter.xfor" size="5" maxlength="1"/>
+			Cost(Greater than): <form:input path="prodFilter.cost" size="5" maxlength="4"/>
+		</div>
+	</div>
 	
 	<p/>
-	
-	<input type="submit" onclick="animateImage();" value="Retrieve Products" />
+	<input type="button" value="Clear" class="clear" />
+	<input type="reset" value="Reset" />
+	<input type="submit" value="Retrieve Products" />
 	<p/>
 		
 	<h3>List of Products</h3>
@@ -95,6 +115,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </form:form>
 
+<script>
+	$( "#datepicker" ).datepicker();
+    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+    
+    $(".clear").bind("click", function() {
+  		$("input[type=text]").val("");
+	});
+</script>
 
 </body>
 
