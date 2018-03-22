@@ -80,8 +80,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	<c:if test="${fn:length(ProductsModel.products) > 0}" >
-		<div  style="font-size: larger; width:60%; text-align: center;">List of Products</div>
+	
 		<table id="tabledata" border="1" style="border: 2px solid black; border-collapse: collapse; ">
+			<caption  style="font-size: larger; text-align: center;">List of Products</caption>
 			<thead style="background: #dc2a27;">
 				<tr>
 					<th onclick="sortTable(0)" >ID</th>
