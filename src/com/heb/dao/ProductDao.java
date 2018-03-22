@@ -3,6 +3,7 @@ package com.heb.dao;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,14 +48,21 @@ public class ProductDao extends NamedParameterJdbcDaoSupport {
 			where.append("%' ");
 		}
 		
-//		if (prodFilter.getLastsold().toString().length() > 0) {
-//			if (where.length() > 0) {
-//				where.append(" and ");
-//			}
-//			where.append("lastsold like '%");
-//			where.append(prodFilter.getLastsold().toString());
-//			where.append("%' ");
-//		}
+		if (prodFilter.getLastsold() != null) {			
+			String dateString = null;
+			SimpleDateFormat sdfr = new SimpleDateFormat("MM/dd/yyyy");
+			try {
+				dateString = sdfr.format(prodFilter.getLastsold());
+				if (where.length() > 0) {
+					where.append(" and ");
+				}				
+				where.append("lastsold >= convert(datetime,'");
+				where.append(dateString);
+				where.append("', 101)");				
+			} catch (Exception e) {
+				
+			}
+		}
 		
 		if (prodFilter.getShelflife().length() > 0) {
 			if (where.length() > 0) {

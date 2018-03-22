@@ -6,6 +6,8 @@ import com.heb.domains.Products;
 
 public class ProductsModel {
 
+	private String dateFilter; 
+	
 	private Products prodFilter = new Products();
 	
 	private List<Products> products;
@@ -28,6 +30,14 @@ public class ProductsModel {
 
 	public void setProdFilter(Products prodFilter) {
 		this.prodFilter = prodFilter;
+	}
+
+	public String getDateFilter() {
+		return dateFilter;
+	}
+
+	public void setDateFilter(String dateFilter) {
+		this.dateFilter = dateFilter;
 	}
 	
 }
